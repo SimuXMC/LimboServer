@@ -56,7 +56,7 @@ public class SettingsContainer {
 			settingsParentFile.mkdirs();
 		}
 		settingsFile.createNewFile();
-		Settings settings = new Settings("Limbo", "", "creative", 3,
+		Settings settings = new Settings("Limbo", "world", "creative", 3,
 				5, "0.0.0.0", 25565, -1, "A Limbo Server", false,
 				"default", "");
 		FileWriter writer = new FileWriter(settingsFile);

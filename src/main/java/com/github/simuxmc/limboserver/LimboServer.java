@@ -23,6 +23,7 @@ import net.minestom.server.instance.AnvilLoader;
 import net.minestom.server.instance.InstanceContainer;
 import net.minestom.server.instance.InstanceManager;
 import net.minestom.server.instance.block.Block;
+import net.minestom.server.inventory.Inventory;
 import net.minestom.server.network.packet.client.ClientPacket;
 import net.minestom.server.network.packet.client.play.ClientChatMessagePacket;
 import net.minestom.server.network.packet.client.play.ClientInteractEntityPacket;
@@ -98,16 +99,10 @@ public class LimboServer {
 		logger.info("Registering events...");
 		GlobalEventHandler globalEventHandler = MinecraftServer.getGlobalEventHandler();
 		Pos finalSpawnPosition = spawnPosition; // required by ide
-		GameMode defaultGameMode = GameMode.CREATIVE;
-		try {
-			defaultGameMode = GameMode.valueOf(settings.getDefaultGamemode().toUpperCase(Locale.ENGLISH));
-		} catch (IllegalArgumentException exception) {
-			logger.warn("No default gamemode found in the settings file, using creative.");
-		}
-		GameMode finalDefaultGameMode = defaultGameMode; // required by ide
+		GameMode defaultGameMode = GameMode.valueOf(settings.getDefaultGamemode().toUpperCase(Locale.ENGLISH));
 		globalEventHandler.addListener(PlayerLoginEvent.class, event -> {
 			final Player player = event.getPlayer();
-			player.setGameMode(finalDefaultGameMode);
+			player.setGameMode(defaultGameMode);
 			player.setInvulnerable(true);
 			event.setSpawningInstance(instanceContainer);
 			player.setRespawnPoint(finalSpawnPosition);
