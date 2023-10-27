@@ -52,13 +52,13 @@ public class LimboServer {
 	public static void main(String[] args) throws IOException, URISyntaxException {
 		// TODO make plugins...? (can change settings, spawn holograms, spawn npcs, make commands, interact with the bungee messaging channel)
 		Logger logger = LoggerFactory.getLogger(LimboServer.class);
-		logger.info("Starting limbo server...");
-		MinecraftServer minecraftServer = MinecraftServer.init();
-		OptifineSupport.enable();
 		logger.info("Getting settings...");
 		Settings settings = SettingsContainer.getInstance().getSettings();
 		System.setProperty("minestom.chunk-view-distance", String.valueOf(settings.getViewDistance()));
 		System.setProperty("minestom.tps", String.valueOf(settings.getTickRate()));
+		logger.info("Starting limbo server...");
+		MinecraftServer minecraftServer = MinecraftServer.init();
+		OptifineSupport.enable();
 		logger.info("Creating end dimension...");
 		DimensionTypeManager manager = MinecraftServer.getDimensionTypeManager();
 		DimensionType end = DimensionType.builder(NamespaceID.from("limbo:end"))
